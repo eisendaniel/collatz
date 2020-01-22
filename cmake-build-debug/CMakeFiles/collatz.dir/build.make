@@ -56,28 +56,28 @@ include CMakeFiles/collatz.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/collatz.dir/flags.make
 
-CMakeFiles/collatz.dir/main.cpp.obj: CMakeFiles/collatz.dir/flags.make
-CMakeFiles/collatz.dir/main.cpp.obj: CMakeFiles/collatz.dir/includes_CXX.rsp
-CMakeFiles/collatz.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Daniel\projects\collatz\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/collatz.dir/main.cpp.obj"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\collatz.dir\main.cpp.obj -c C:\Users\Daniel\projects\collatz\main.cpp
+CMakeFiles/collatz.dir/collatz.cpp.obj: CMakeFiles/collatz.dir/flags.make
+CMakeFiles/collatz.dir/collatz.cpp.obj: CMakeFiles/collatz.dir/includes_CXX.rsp
+CMakeFiles/collatz.dir/collatz.cpp.obj: ../collatz.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Daniel\projects\collatz\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/collatz.dir/collatz.cpp.obj"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\collatz.dir\collatz.cpp.obj -c C:\Users\Daniel\projects\collatz\collatz.cpp
 
-CMakeFiles/collatz.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/collatz.dir/main.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Daniel\projects\collatz\main.cpp > CMakeFiles\collatz.dir\main.cpp.i
+CMakeFiles/collatz.dir/collatz.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/collatz.dir/collatz.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Daniel\projects\collatz\collatz.cpp > CMakeFiles\collatz.dir\collatz.cpp.i
 
-CMakeFiles/collatz.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/collatz.dir/main.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Daniel\projects\collatz\main.cpp -o CMakeFiles\collatz.dir\main.cpp.s
+CMakeFiles/collatz.dir/collatz.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/collatz.dir/collatz.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Daniel\projects\collatz\collatz.cpp -o CMakeFiles\collatz.dir\collatz.cpp.s
 
 # Object files for target collatz
 collatz_OBJECTS = \
-"CMakeFiles/collatz.dir/main.cpp.obj"
+"CMakeFiles/collatz.dir/collatz.cpp.obj"
 
 # External object files for target collatz
 collatz_EXTERNAL_OBJECTS =
 
-collatz.exe: CMakeFiles/collatz.dir/main.cpp.obj
+collatz.exe: CMakeFiles/collatz.dir/collatz.cpp.obj
 collatz.exe: CMakeFiles/collatz.dir/build.make
 collatz.exe: D:/lib/SFML/lib/libsfml-graphics-s.a
 collatz.exe: D:/lib/SFML/lib/libsfml-window-s.a

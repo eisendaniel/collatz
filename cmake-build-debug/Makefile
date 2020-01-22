@@ -122,32 +122,32 @@ collatz/fast:
 	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/build
 .PHONY : collatz/fast
 
-main.obj: main.cpp.obj
+collatz.obj: collatz.cpp.obj
 
-.PHONY : main.obj
+.PHONY : collatz.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+collatz.cpp.obj:
+	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/collatz.cpp.obj
+.PHONY : collatz.cpp.obj
 
-main.i: main.cpp.i
+collatz.i: collatz.cpp.i
 
-.PHONY : main.i
+.PHONY : collatz.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/main.cpp.i
-.PHONY : main.cpp.i
+collatz.cpp.i:
+	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/collatz.cpp.i
+.PHONY : collatz.cpp.i
 
-main.s: main.cpp.s
+collatz.s: collatz.cpp.s
 
-.PHONY : main.s
+.PHONY : collatz.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/main.cpp.s
-.PHONY : main.cpp.s
+collatz.cpp.s:
+	$(MAKE) -f CMakeFiles\collatz.dir\build.make CMakeFiles/collatz.dir/collatz.cpp.s
+.PHONY : collatz.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... edit_cache
 	@echo ... collatz
 	@echo ... rebuild_cache
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... collatz.obj
+	@echo ... collatz.i
+	@echo ... collatz.s
 .PHONY : help
 
 

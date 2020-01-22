@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/collatz.dir/main.cpp.obj"
+  "CMakeFiles/collatz.dir/collatz.cpp.obj"
   "collatz.exe"
   "collatz.exe.manifest"
   "collatz.pdb"

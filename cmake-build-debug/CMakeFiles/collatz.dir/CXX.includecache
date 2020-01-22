@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Daniel/projects/collatz/main.cpp
+C:/Users/Daniel/projects/collatz/collatz.cpp
 iostream
 -
 SFML/Graphics.hpp
