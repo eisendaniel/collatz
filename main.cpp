@@ -23,10 +23,10 @@ std::vector<int> collatz(int n)
 
 int main()
 {
-	int width = 900;
-	int height = 900;
+	int width = 1080;
+	int height = 1000;
 	int border = (width - (width / GOLDEN)) / 4;
-	int seg = 4;
+	int seg = 5;
 	float d_theta[] = {M_PI / 15.0, -(M_PI / 30.0)};
 	float x, y;
 	double theta;
@@ -37,7 +37,7 @@ int main()
 	sf::VertexArray path(sf::LineStrip);
 	std::vector<sf::VertexArray> paths;
 
-	for (int i = 0; i < 100000; ++i) {
+	for (int i = 0; i < 10000; ++i) {
 		theta = M_PI_2;
 		parity = collatz(i);
 		x = 1.0 / GOLDEN * width;
