@@ -1,16 +1,17 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include <algorithm>
 #include <cmath>
 
 //CONSTANTS for windows and canvas sizes
-#define GOLDEN 1.61803398875
 #define WIDTH 1000
 #define HEIGHT 1000
-#define BORDER (WIDTH-(WIDTH/GOLDEN))/8
+#define BORDER 64
 
 enum dir { left, right };
+sf::Clock timer;
+
 
 /* Implementation of Collatz Conjecture calculator
  * for given n, runs through sequence
@@ -32,50 +33,60 @@ void collatz(unsigned int n, std::vector<int> &seq)
 
 /* Generator of the Vertex Array of lines
  * */
-void genPaths(unsigned int n, float d_left, float d_right, std::vector<sf::VertexArray> &paths)
+void genPath(unsigned int n, float d_left, float d_right, sf::VertexArray &path, sf::RenderWindow &window)
 {
 	float d_theta[] = {d_left, d_right};
-	sf::VertexArray path(sf::LineStrip);
 	std::vector<int> parity;
 	float x, y;
 	double theta;
-	int seg = 5, c;
+	int seg = ceil(window.getSize().y / 200.0), c;
 
-	paths.clear();
+	path.clear();
 	for (unsigned int i = 0; i < n; ++i) {
-		path.clear();
 		parity.clear();
 		collatz(i, parity);
 		theta = M_PI_2;
-		x = WIDTH / 2.0;
-		y = HEIGHT - BORDER;
+		x = window.getSize().x / 2.0;
+		y = window.getSize().y - BORDER;
 		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0, 0)));
-		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color::Black));
+		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(128, 128, 128)));
 		c = 1;
 		for (auto &p : parity) {
 			theta += d_theta[p];
 			x += (seg * cos(theta));
 			y -= (seg * sin(theta));
 			path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0,
-									     255 - (255 * c++ / parity.size()))));
+									     128 - (128 * c++ / parity.size()))));
 		}
 		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0, 0)));
-		paths.push_back(path);
 	}
+}
+
+void screencapture(sf::RenderWindow &window)
+{
+	sf::Vector2u windowSize = window.getSize();
+	sf::Texture texture;
+	texture.create(windowSize.x, windowSize.y);
+	texture.update(window);
+	sf::Image screenshot = texture.copyToImage();
+	char filename[128];
+	sprintf(filename, "screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
+	screenshot.saveToFile(filename);
+	timer.restart();
 }
 
 int main()
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Collatz", sf::Style::Close, settings);
-	window.setFramerateLimit(30);
+	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Collatz", sf::Style::Default, settings);
+	window.setFramerateLimit(60);
 
-	float d_left = M_PI / 15;
+	float d_left = (M_PI / 15);
 	float d_right = -(M_PI / 30);
-	unsigned int n = 11;
-	std::vector<sf::VertexArray> paths;
-	genPaths(n, d_left, d_right, paths);
+	unsigned int n = 1000;
+	sf::VertexArray path(sf::LineStrip);
+	genPath(n, d_left, d_right, path, window);
 
 	while (window.isOpen()) { //lifetime of program
 		sf::Event event = {};
@@ -83,26 +94,49 @@ int main()
 			if (event.type == sf::Event::Closed) { window.close(); }
 			else if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Escape) { window.close(); }
-				else if (event.key.code == sf::Keyboard::Right) {
-					d_left -= 0.0005;
-					d_right -= 0.0005;
-					genPaths(n, d_left, d_right, paths);
-				} else if (event.key.code == sf::Keyboard::Left) {
-					d_left += 0.0005;
-					d_right += 0.0005;
-					genPaths(n, d_left, d_right, paths);
-				} else if (event.key.code == sf::Keyboard::Up) {
-					n += 100;
-					genPaths(n, d_left, d_right, paths);
-				} else if (event.key.code == sf::Keyboard::Down) {
-					n = (n - 100 > 0) ? n - 100 : n;
-					genPaths(n, d_left, d_right, paths);
-				}
+				else if (event.key.code == sf::Keyboard::Space) { screencapture(window); }
+			} // catch the resize events
+			else if (event.type == sf::Event::Resized) {
+				// update the view to the new size of the window
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
+				genPath(n, d_left, d_right, path, window);
 			}
 		}
 		window.clear(sf::Color(200, 200, 200));
-		for (auto &p : paths) {
-			window.draw(p);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+			d_left -= 0.0005;
+			d_right -= 0.0005;
+			genPath(n, d_left, d_right, path, window);
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+			d_left += 0.0005;
+			d_right += 0.0005;
+			genPath(n, d_left, d_right, path, window);
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			if (n < 100) {
+				n += 1;
+			} else {
+				n += 100;
+			}
+			genPath(n, d_left, d_right, path, window);
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			if (n <= 0) {
+				n = 0;
+			} else if (n < 100) {
+				n -= 1;
+			} else {
+				n -= 100;
+			}
+			genPath(n, d_left, d_right, path, window);
+		}
+		window.draw(path);
+		if (timer.getElapsedTime().asMilliseconds() < 200) {
+			sf::RectangleShape rectangle;
+			rectangle.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+			rectangle.setFillColor(sf::Color(0, 0, 0, 64));
+			rectangle.setPosition(0, 0);
+			window.draw(rectangle);
 		}
 		window.display();
 	}

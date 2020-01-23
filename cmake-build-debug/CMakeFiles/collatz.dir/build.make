@@ -80,9 +80,16 @@ collatz_EXTERNAL_OBJECTS =
 collatz.exe: CMakeFiles/collatz.dir/collatz.cpp.obj
 collatz.exe: CMakeFiles/collatz.dir/build.make
 collatz.exe: D:/lib/SFML/lib/libsfml-graphics-s.a
+collatz.exe: D:/lib/SFML/lib/libsfml-audio-s.a
 collatz.exe: D:/lib/SFML/lib/libsfml-window-s.a
-collatz.exe: D:/lib/SFML/lib/libsfml-system-s.a
 collatz.exe: D:/lib/SFML/lib/libfreetype.a
+collatz.exe: D:/lib/SFML/lib/libopenal32.a
+collatz.exe: D:/lib/SFML/lib/libsfml-system-s.a
+collatz.exe: D:/lib/SFML/lib/libvorbisfile.a
+collatz.exe: D:/lib/SFML/lib/libvorbisenc.a
+collatz.exe: D:/lib/SFML/lib/libvorbis.a
+collatz.exe: D:/lib/SFML/lib/libogg.a
+collatz.exe: D:/lib/SFML/lib/libFLAC.a
 collatz.exe: CMakeFiles/collatz.dir/linklibs.rsp
 collatz.exe: CMakeFiles/collatz.dir/objects1.rsp
 collatz.exe: CMakeFiles/collatz.dir/link.txt
