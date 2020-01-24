@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <cmath>
+#include <sstream>
 
 //CONSTANTS for windows and canvas sizes
 #define WIDTH 1000
@@ -92,10 +93,19 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Collatz", sf::Style::Default, settings);
 	window.setFramerateLimit(60);
 
+	sf::Font font;
+	font.loadFromFile("inconsolata.ttf");
+	std::ostringstream s;
+	sf::Text count;
+	count.setFont(font);
+	count.setFillColor(sf::Color::Black);
+	count.setPosition(window.getSize().x / 2, window.getSize().y - BORDER);
+
 	float d_left = (M_PI / 15);
 	float d_right = -(M_PI / 30);
 	unsigned int n = 1000;
 	sf::VertexArray path(sf::LineStrip);
+
 	genPath(n, d_left, d_right, path, window);
 
 	while (window.isOpen()) { //lifetime of program
@@ -114,6 +124,7 @@ int main()
 				// update the view to the new size of the window
 				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 				window.setView(sf::View(visibleArea));
+				count.setPosition(window.getSize().x / 2, window.getSize().y - BORDER);
 				genPath(n, d_left, d_right, path, window);
 			}
 		}
@@ -144,7 +155,11 @@ int main()
 			}
 			genPath(n, d_left, d_right, path, window);
 		}
+		s.str("");
+		s << n;
+		count.setString(s.str());
 		window.draw(path);
+		window.draw(count);
 		if (timer.getElapsedTime().asMilliseconds() < 200) {
 			sf::RectangleShape rectangle;
 			rectangle.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));

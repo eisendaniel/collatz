@@ -21,6 +21,8 @@ cstdio
 -
 cmath
 -
+sstream
+-
 
 D:/lib/SFML/include/SFML/Audio.hpp
 SFML/System.hpp
