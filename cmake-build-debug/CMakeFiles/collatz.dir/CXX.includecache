@@ -13,7 +13,11 @@ SFML/Audio.hpp
 -
 vector
 -
+map
+-
 algorithm
+-
+cstdio
 -
 cmath
 -

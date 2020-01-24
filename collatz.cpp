@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <vector>
+#include <map>
 #include <algorithm>
+#include <cstdio>
 #include <cmath>
 
 //CONSTANTS for windows and canvas sizes
@@ -11,24 +13,30 @@
 
 enum dir { left, right };
 sf::Clock timer;
-
+std::map<unsigned int, std::vector<int>> computed;
 
 /* Implementation of Collatz Conjecture calculator
  * for given n, runs through sequence
  * producing sequence, left for odd, right for even
  */
-void collatz(unsigned int n, std::vector<int> &seq)
+void collatz(unsigned int start, std::vector<int> &parity)
 {
+	unsigned int n = start;
 	while (n > 1) {
+		if (computed.count(n)) {
+			parity.insert(parity.end(), computed[n].begin(), computed[n].end());
+			break;
+		}
 		if (n % 2) { //if odd
 			n = 3 * n + 1;
-			seq.push_back(left);
+			parity.push_back(left);
 		} else { //if even
 			n /= 2;
-			seq.push_back(right);
+			parity.push_back(right);
 		}
 	}
-	std::reverse(seq.begin(), seq.end());
+	computed.insert(std::pair<unsigned int, std::vector<int>>(start, parity));
+	std::reverse(parity.begin(), parity.end());
 }
 
 /* Generator of the Vertex Array of lines
@@ -49,14 +57,14 @@ void genPath(unsigned int n, float d_left, float d_right, sf::VertexArray &path,
 		x = window.getSize().x / 2.0;
 		y = window.getSize().y - BORDER;
 		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0, 0)));
-		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(128, 128, 128)));
+		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0)));
 		c = 1;
 		for (auto &p : parity) {
 			theta += d_theta[p];
 			x += (seg * cos(theta));
 			y -= (seg * sin(theta));
 			path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0,
-									     128 - (128 * c++ / parity.size()))));
+									     255 - (255 * c++ / parity.size()))));
 		}
 		path.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(0, 0, 0, 0)));
 	}
@@ -69,9 +77,11 @@ void screencapture(sf::RenderWindow &window)
 	texture.create(windowSize.x, windowSize.y);
 	texture.update(window);
 	sf::Image screenshot = texture.copyToImage();
+
 	char filename[128];
 	sprintf(filename, "screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
 	screenshot.saveToFile(filename);
+
 	timer.restart();
 }
 
@@ -91,10 +101,14 @@ int main()
 	while (window.isOpen()) { //lifetime of program
 		sf::Event event = {};
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) { window.close(); }
-			else if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Escape) { window.close(); }
-				else if (event.key.code == sf::Keyboard::Space) { screencapture(window); }
+			if (event.type == sf::Event::Closed) {
+				window.close();
+				break;
+			} else if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					window.close();
+					break;
+				} else if (event.key.code == sf::Keyboard::Space) { screencapture(window); }
 			} // catch the resize events
 			else if (event.type == sf::Event::Resized) {
 				// update the view to the new size of the window

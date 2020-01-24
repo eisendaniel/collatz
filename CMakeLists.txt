@@ -6,8 +6,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -O3 -pedantic")
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/lib/SFML/lib/cmake/SFML)
-find_package(SFML COMPONENTS audio graphics)
+find_package(SFML COMPONENTS audio graphics network system window)
 
 add_executable(collatz collatz.cpp)
 
-target_link_libraries(collatz sfml-graphics sfml-audio)
+target_link_libraries(collatz sfml-audio sfml-graphics sfml-network sfml-system sfml-window)
