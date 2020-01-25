@@ -3,23 +3,6 @@
 
 CMakeFiles/collatz.dir/collatz.cpp.obj
  C:/Users/Daniel/projects/collatz/collatz.cpp
- D:/lib/SFML/include/SFML/Audio.hpp
- D:/lib/SFML/include/SFML/Audio/AlResource.hpp
- D:/lib/SFML/include/SFML/Audio/Export.hpp
- D:/lib/SFML/include/SFML/Audio/InputSoundFile.hpp
- D:/lib/SFML/include/SFML/Audio/Listener.hpp
- D:/lib/SFML/include/SFML/Audio/Music.hpp
- D:/lib/SFML/include/SFML/Audio/OutputSoundFile.hpp
- D:/lib/SFML/include/SFML/Audio/Sound.hpp
- D:/lib/SFML/include/SFML/Audio/SoundBuffer.hpp
- D:/lib/SFML/include/SFML/Audio/SoundBufferRecorder.hpp
- D:/lib/SFML/include/SFML/Audio/SoundFileFactory.hpp
- D:/lib/SFML/include/SFML/Audio/SoundFileFactory.inl
- D:/lib/SFML/include/SFML/Audio/SoundFileReader.hpp
- D:/lib/SFML/include/SFML/Audio/SoundFileWriter.hpp
- D:/lib/SFML/include/SFML/Audio/SoundRecorder.hpp
- D:/lib/SFML/include/SFML/Audio/SoundSource.hpp
- D:/lib/SFML/include/SFML/Audio/SoundStream.hpp
  D:/lib/SFML/include/SFML/Config.hpp
  D:/lib/SFML/include/SFML/Graphics.hpp
  D:/lib/SFML/include/SFML/Graphics/BlendMode.hpp
