@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <windows.h>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -78,11 +78,10 @@ void screencapture(sf::RenderWindow &window)
 	texture.create(windowSize.x, windowSize.y);
 	texture.update(window);
 	sf::Image screenshot = texture.copyToImage();
-
 	char filename[128];
-	sprintf(filename, "screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
+	sprintf(filename, "screenshots/screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
 	screenshot.saveToFile(filename);
-
+	PlaySound("resouces/click.wav", NULL, SND_ASYNC);
 	timer.restart();
 }
 
@@ -94,7 +93,7 @@ int main()
 	window.setFramerateLimit(60);
 
 	sf::Font font;
-	font.loadFromFile("inconsolata.ttf");
+	font.loadFromFile("resouces/inconsolata.ttf");
 	std::ostringstream s;
 	sf::Text count;
 	count.setFont(font);
