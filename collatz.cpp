@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <windows.h>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -15,6 +15,7 @@
 enum dir { left, right };
 sf::Clock timer;
 std::map<unsigned int, std::vector<int>> computed;
+sf::Music m;
 
 /* Implementation of Collatz Conjecture calculator
  * for given n, runs through sequence
@@ -81,7 +82,8 @@ void screencapture(sf::RenderWindow &window)
 	char filename[128];
 	sprintf(filename, "screenshots/screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
 	screenshot.saveToFile(filename);
-	PlaySound("resouces/click.wav", NULL, SND_ASYNC);
+	m.openFromFile("resouces/click.wav");
+	m.play();
 	timer.restart();
 }
 
