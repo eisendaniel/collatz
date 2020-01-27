@@ -15,7 +15,6 @@
 enum dir { left, right };
 sf::Clock timer;
 std::map<unsigned int, std::vector<int>> computed;
-sf::Music m;
 
 /* Implementation of Collatz Conjecture calculator
  * for given n, runs through sequence
@@ -74,12 +73,15 @@ void genPath(unsigned int n, float d_left, float d_right, sf::VertexArray &path,
 
 void screencapture(sf::RenderWindow &window)
 {
-	sf::Vector2u windowSize = window.getSize();
 	sf::Texture texture;
+	sf::Image screenshot;
+	char filename[128];
+	sf::Music m;
+
+	sf::Vector2u windowSize = window.getSize();
 	texture.create(windowSize.x, windowSize.y);
 	texture.update(window);
-	sf::Image screenshot = texture.copyToImage();
-	char filename[128];
+	screenshot = texture.copyToImage();
 	sprintf(filename, "screenshots/screenshot_%d.png", timer.getElapsedTime().asMilliseconds());
 	screenshot.saveToFile(filename);
 	m.openFromFile("resouces/click.wav");
@@ -162,10 +164,8 @@ int main()
 		window.draw(path);
 		window.draw(count);
 		if (timer.getElapsedTime().asMilliseconds() < 200) {
-			sf::RectangleShape rectangle;
-			rectangle.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+			sf::RectangleShape rectangle(sf::Vector2f(window.getSize().x, window.getSize().y));
 			rectangle.setFillColor(sf::Color(0, 0, 0, 64));
-			rectangle.setPosition(0, 0);
 			window.draw(rectangle);
 		}
 		window.display();
