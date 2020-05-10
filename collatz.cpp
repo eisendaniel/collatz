@@ -107,6 +107,7 @@ int main()
 	float d_left = (M_PI / 15);
 	float d_right = -(M_PI / 30);
 	unsigned int n = 1000;
+
 	sf::VertexArray path(sf::LineStrip);
 
 	genPath(n, d_left, d_right, path, window);
